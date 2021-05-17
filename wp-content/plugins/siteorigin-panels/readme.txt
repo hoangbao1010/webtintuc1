@@ -3,8 +3,8 @@ Tags: page builder, responsive, parallax, widgets, blocks, gallery, layout, grid
 Requires at least: 4.7
 Tested up to: 5.7
 Requires PHP: 5.6.20
-Stable tag: 2.12.0
-Build time: 2021-05-03T16:55:19+02:00
+Stable tag: 2.12.1
+Build time: 2021-05-11T17:12:29+02:00
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Donate link: https://siteorigin.com/downloads/premium/
@@ -96,6 +96,12 @@ Page Builder is actively developed and updated, so generally I'd recommend that 
 We've tried to ensure that Page Builder is compatible with most plugin widgets. It's best to just download Page Builder and test for yourself.
 
 == Changelog ==
+
+= 2.12.1 - 11 May 2021 =
+* Prevented potential repeated rendering of layouts.
+* Moved the Page Builder metabox PHP outside of the metabox template.
+* Added a check for `has_blocks()` before using the function.
+* Resolved potential background display issue when a local and external background is used.
 
 = 2.12.0 - 03 May 2021 =
 * **New Parallax Scrolling!** Existing users can optionally switch to `Modern` at `Settings > Page Builder > General`.

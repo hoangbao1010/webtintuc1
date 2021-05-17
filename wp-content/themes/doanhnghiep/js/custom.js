@@ -98,51 +98,6 @@ $(document).ready(function(){
     });
 
 
-    $('.qb_big_post_left ul').owlCarousel({
-        loop:true,
-        margin:30,
-        nav:true,
-        dots:false,
-        // autoplay: true,
-        // autoplayTimeout: 5000,
-        // smartSpeed: 1000,
-        responsive:{
-            0:{
-                items:1
-            },
-            767:{
-                items:1
-            },
-            1000:{
-                items:1
-            }
-        }
-    });
-    $('.qb_ttdn_slider ul').owlCarousel({
-        loop:true,
-        margin:30,
-        nav:true,
-        dots:false,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        smartSpeed: 1000,
-        responsive:{
-            0:{
-                items:1
-            },
-            480:{
-                items:2
-            },
-            767:{
-                items:2
-            },
-            1000:{
-                items:4,
-                slideBy: 4
-            }
-        }
-    });
-
     $(window).scroll(function(){
         if($(this).scrollTop() > 50){
             $('.scroll_top').fadeIn();
@@ -154,16 +109,8 @@ $(document).ready(function(){
         event.preventDefault();
         $('html,body').animate({scrollTop : 0},800);
     });
-    $('.menu_zoom .icon_zoom').click(function(){
-        $('.menu_zoom .zoom_width').slideToggle(300);
-    });
-    
-    $('.list_title ul li').click(function(){
-        var tab_id = $(this).attr('data-tab');
-        console.log(tab_id);
-        $('.list_title ul li').removeClass('current');
-        $(this).addClass('current');
-        $('.tab-content').removeClass('current');
-        $("#"+tab_id).addClass('current');
+    $('.search_form').click(function(){
+        $('.search_form .tg_off').toggleClass('tg_on');
+        console.log(1);
     });
 });

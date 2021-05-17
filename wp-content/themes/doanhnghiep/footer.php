@@ -3,7 +3,7 @@
 			<?php
 			$args = array(
 				'post_type' => 'page',
-                'page_id' => 11 //list of page_ids
+                'page_id' => 176 //list of page_ids
       );
 			$ft_page_query = new WP_Query( $args );
 			if(have_posts() ) :
