@@ -1,4 +1,40 @@
 <?php 
+// shortcode social footer
+function myshortcode_footer()
+{
+	ob_start();
+	if (get_option('footer_fb') || get_option('footer_google') || get_option('footer_twitter') || get_option('footer_pinterest'))
+	{
+		?>
+		<ul>
+			
+			<?php if (get_option('footer_fb'))
+			{ ?>
+				<li><a href="<?php echo get_option('footer_fb'); ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+				<?php
+			} ?>
+			<?php if (get_option('footer_google'))
+			{ ?>
+				<li><a href="<?php echo get_option('footer_google'); ?>" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+				<?php
+			} ?>
+			<?php if (get_option('footer_pinterest'))
+			{ ?>
+				<li><a href="<?php echo get_option('footer_pinterest'); ?>" target="_blank"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+				<?php
+			} ?>
+			<?php if (get_option('footer_twitter'))
+			{ ?>
+				<li><a href="<?php echo get_option('footer_twitter'); ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<?php
+			} ?>
+		</ul>
+		<?php
+	}
+	return ob_get_clean();
+}
+add_shortcode('social_footer', 'myshortcode_footer');
+
 // shortcode cptpp sidebar homepage
 function myshortcode_cptpp_sidebar(){ 
 	ob_start();?>
@@ -177,7 +213,35 @@ function myshortcode_cptpp_sidebar(){
 												<div class="info_post">
 													<h4><a href="<?php the_permalink(); ?>" target="_blank"><?php the_title(); ?></a></h4>
 													<span class="time_post"><?php the_time('d/m/Y H:i'); ?></span>
-													</div>
+												</div>
+											</li>
+										<?php endwhile; 
+										wp_reset_postdata();
+										?>
+									</ul>
+									<?php else : echo 'No data'; 
+									endif; ?>
+								</div>
+								<div id="tab-2" class="list_post tab-content">
+									<?php  $ft_args = array(
+										'order' => 'ASC',
+										'posts_per_page' => 10,
+										'offset' => 10,
+										'meta_key' => 'featured-checkbox',
+										'meta_value' => 'yes'
+									);
+									$ft_query = new WP_Query($ft_args);
+									if($ft_query->have_posts()) : ?>
+										<ul>
+											<?php while ($ft_query->have_posts()) : $ft_query->the_post(); ?>
+												<li>
+													<?php 
+													global $post;
+													$sk_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
+													<a href="<?php the_permalink(); ?>" target="_blank">
+														<figure style="background: url('<?php echo $sk_image[0]; ?>');"></figure>
+														<h4><?php the_title(); ?></h4>
+													</a>
 												</li>
 											<?php endwhile; 
 											wp_reset_postdata();
@@ -186,37 +250,9 @@ function myshortcode_cptpp_sidebar(){
 										<?php else : echo 'No data'; 
 										endif; ?>
 									</div>
-									<div id="tab-2" class="list_post tab-content">
-										<?php  $ft_args = array(
-											'order' => 'ASC',
-											'posts_per_page' => 10,
-											'offset' => 10,
-											'meta_key' => 'featured-checkbox',
-											'meta_value' => 'yes'
-										);
-										$ft_query = new WP_Query($ft_args);
-										if($ft_query->have_posts()) : ?>
-											<ul>
-												<?php while ($ft_query->have_posts()) : $ft_query->the_post(); ?>
-													<li>
-														<?php 
-														global $post;
-														$sk_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
-														<a href="<?php the_permalink(); ?>" target="_blank">
-															<figure style="background: url('<?php echo $sk_image[0]; ?>');"></figure>
-															<h4><?php the_title(); ?></h4>
-														</a>
-													</li>
-												<?php endwhile; 
-												wp_reset_postdata();
-												?>
-											</ul>
-											<?php else : echo 'No data'; 
-											endif; ?>
-										</div>
-									</div>
 								</div>
-								<?php 
-								return ob_get_clean();
-							}
-							add_shortcode('sc_ft_check_archive','myshortcode_featured_checkbox_archive');
+							</div>
+							<?php 
+							return ob_get_clean();
+						}
+						add_shortcode('sc_ft_check_archive','myshortcode_featured_checkbox_archive');

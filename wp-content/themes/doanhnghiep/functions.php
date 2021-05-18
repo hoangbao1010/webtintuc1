@@ -1,6 +1,5 @@
 <?php 
 include  'inc/admin/custom-post-type/custom-post-type.php';
-include  'inc/admin/aio-list-categories/aio-list-category.php';
 include  'inc/frontend/shortcode/shortcode.php';
 include  'inc/admin/admin-framework/admin-framework.php';
 include  'inc/admin/admin-metabox/meta-box.php';
