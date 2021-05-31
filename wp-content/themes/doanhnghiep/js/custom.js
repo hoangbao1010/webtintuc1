@@ -113,4 +113,11 @@ $(document).ready(function(){
         $('.search_form .tg_off').toggleClass('tg_on');
         console.log(1);
     });
+        $('.list_title ul li').click(function(){
+        var tab_id = $(this).attr('data-tab');
+        $('.list_title ul li').removeClass('current');
+        $(this).addClass('current');
+        $('.tab-content').removeClass('current');
+        $("#"+tab_id).addClass('current');
+    });
 });

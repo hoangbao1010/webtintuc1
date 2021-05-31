@@ -166,8 +166,8 @@ function wpb_widgets_init() {
   ) );
 
   register_sidebar( array(
-    'name' => 'Sidebar right archive' ,
-    'id' => 'sidebar_archive',
+    'name' => 'Sidebar right single' ,
+    'id' => 'sidebar_single',
     'description' => 'The main sidebar appears on the right on each page except the front page template',
     'before_widget' => '<aside id="%1$s" class="widget %2$s">',
     'after_widget' => '</aside>',
@@ -285,10 +285,10 @@ function woocommerce_template_loop_product_thumbnail(){
 function my_taxonomy_add_meta_fields( $taxonomy ) { ?>
   <div class="form-field term-group">
     <label for="show_category">
-      <?php _e( 'Show Two Cols', 'codilight-lite' ); ?> <input type="checkbox" id="show_category_two_col" name="show_category_two_col" value="yes" />
+      <?php _e( 'Show Three Cols', 'codilight-lite' ); ?> <input type="checkbox" id="show_category_three_col" name="show_category_three_col" value="yes" />
     </label>
     <label for="show_category">
-      <?php _e( 'Show One Cols', 'codilight-lite' ); ?> <input type="checkbox" id="show_category_one_col" name="show_category_one_col" value="yes" />
+      <?php _e( 'Show Two Cols', 'codilight-lite' ); ?> <input type="checkbox" id="show_category_two_col" name="show_category_two_col" value="yes" />
     </label>
     </div><?php
   }
@@ -296,25 +296,25 @@ function my_taxonomy_add_meta_fields( $taxonomy ) { ?>
 
 // Edit term page
   function my_taxonomy_edit_meta_fields( $term, $taxonomy ) {
-    $show_category_two_col = get_term_meta( $term->term_id, 'show_category_two_col', true ); ?>
+    $show_category_three_col = get_term_meta( $term->term_id, 'show_category_three_col', true ); ?>
 
     <tr class="form-field term-group-wrap">
       <th scope="row">
-        <label for="show_category_two_col"><?php _e( 'Show Two Cols', 'codilight-lite' ); ?></label>
+        <label for="show_category_three_col"><?php _e( 'Show Three Cols', 'codilight-lite' ); ?></label>
       </th>
       <td>
-        <input type="checkbox" id="show_category_two_col" name="show_category_two_col" value="yes" <?php echo ( $show_category_two_col ) ? checked( $show_category_two_col, 'yes' ) : ''; ?>/>
+        <input type="checkbox" id="show_category_three_col" name="show_category_three_col" value="yes" <?php echo ( $show_category_three_col ) ? checked( $show_category_three_col, 'yes' ) : ''; ?>/>
       </td>
       </tr><?php
 
-      $show_category_one_col = get_term_meta( $term->term_id, 'show_category_one_col', true ); ?>
+      $show_category_two_col = get_term_meta( $term->term_id, 'show_category_two_col', true ); ?>
 
       <tr class="form-field term-group-wrap">
         <th scope="row">
-          <label for="show_category_one_col"><?php _e( 'Show One Cols', 'codilight-lite' ); ?></label>
+          <label for="show_category_two_col"><?php _e( 'Show Two Cols', 'codilight-lite' ); ?></label>
         </th>
         <td>
-          <input type="checkbox" id="show_category_one_col" name="show_category_one_col" value="yes" <?php echo ( $show_category_one_col ) ? checked( $show_category_one_col, 'yes' ) : ''; ?>/>
+          <input type="checkbox" id="show_category_two_col" name="show_category_two_col" value="yes" <?php echo ( $show_category_two_col ) ? checked( $show_category_two_col, 'yes' ) : ''; ?>/>
         </td>
         </tr><?php
       }
@@ -322,16 +322,16 @@ function my_taxonomy_add_meta_fields( $taxonomy ) { ?>
 
 // Save custom meta
       function my_taxonomy_save_taxonomy_meta( $term_id, $tag_id ) {
+        if ( isset( $_POST[ 'show_category_three_col' ] ) ) {
+          update_term_meta( $term_id, 'show_category_three_col', 'yes' );
+        } else {
+          update_term_meta( $term_id, 'show_category_three_col', '' );
+        }
+
         if ( isset( $_POST[ 'show_category_two_col' ] ) ) {
           update_term_meta( $term_id, 'show_category_two_col', 'yes' );
         } else {
           update_term_meta( $term_id, 'show_category_two_col', '' );
-        }
-
-        if ( isset( $_POST[ 'show_category_one_col' ] ) ) {
-          update_term_meta( $term_id, 'show_category_one_col', 'yes' );
-        } else {
-          update_term_meta( $term_id, 'show_category_one_col', '' );
         }
       }
       add_action( 'created_category', 'my_taxonomy_save_taxonomy_meta', 10, 2 );

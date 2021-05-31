@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - Twenty Twenty package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-11-21 09:32:55+0000\n"
+"PO-Revision-Date: 2021-05-22 12:55:18+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,6 +19,52 @@ msgstr "Giao diện mặc định 2020 được thiết kế để tận dụng 
 #: inc/block-patterns.php:20
 msgid "Twenty Twenty"
 msgstr "2020"
+
+#: inc/block-patterns.php:187
+msgid "Introduction"
+msgstr "Giới thiệu"
+
+#: inc/block-patterns.php:93
+msgid "Shop Now"
+msgstr "Mua ngay"
+
+#: inc/block-patterns.php:86
+msgid "The Store"
+msgstr "Cửa hàng"
+
+#: classes/class-twentytwenty-customize.php:125
+msgctxt "color"
+msgid "Default"
+msgstr "Mặc định"
+
+#: inc/block-patterns.php:157 inc/block-patterns.php:171
+msgid "August 1 — December 1"
+msgstr "1 Tháng 8 - 1 Tháng 12"
+
+#: inc/block-patterns.php:118
+msgid "<em>Dates</em><br>Aug 1 — Dec 1"
+msgstr "<em>Ngày</em><br>1 Tháng 8 - 1 Tháng 12"
+
+#: header.php:53 header.php:157
+msgctxt "toggle text"
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: inc/block-patterns.php:128
+msgid "<em>Price</em><br>Included"
+msgstr "<em>Giá</em><br>bao gồm"
+
+#: inc/block-patterns.php:142
+msgid "Featured Content"
+msgstr "Bài viết nổi bật"
+
+#: inc/block-patterns.php:108
+msgid "Event Details"
+msgstr "Chi tiết sự kiện"
+
+#: index.php:51
+msgid "Nothing Found"
+msgstr "Không kết quả"
 
 #: inc/starter-content.php:39
 msgctxt "Theme starter content"

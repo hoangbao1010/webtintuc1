@@ -35,32 +35,58 @@ function myshortcode_footer()
 }
 add_shortcode('social_footer', 'myshortcode_footer');
 
-// shortcode cptpp sidebar homepage
-function myshortcode_cptpp_sidebar(){ 
+// shortcode social single page
+function myshortcode_social_single_page()
+{
+	ob_start(); ?>
+	<div class="social_single_page">
+		<?php global $post;
+		$facebook = get_post_meta($post->ID, '_facebook', true);
+		$twitter = get_post_meta($post->ID, '_twitter', true);
+		$ggplus = get_post_meta($post->ID, '_ggplus', true);
+		$pinterest = get_post_meta($post->ID, '_pinterest', true);
+		?>
+		<ul>
+			<li><a href="<?php echo $facebook ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+			<li><a href="<?php echo $twitter ?>" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+			<li><a href="<?php echo $ggplus ?>" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+			<li><a href="<?php echo $pinterest ?>" target="_blank"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+		</ul>
+		<?php
+		return ob_get_clean(); ?>
+	</div>
+<?php }
+add_shortcode('social_single_page', 'myshortcode_social_single_page');
+
+// shortcode canbiet sidebar homepage
+function myshortcode_canbiet_sidebar(){ 
 	ob_start();?>
-	<div class="qb_cptpp_sidebar qb_post_hp">
-		<?php $title_hp = get_cat_name(75);?>
-		<h2 class="title_home_page"><a href="<?php echo get_category_link(75); ?>" target="_blank"><?php echo $title_hp; ?></a></h2>
-		<?php $cptpp_arg = array(
+	<div class="qb_canbiet_sidebar">
+		<?php $title_hp = get_cat_name(10);?>
+		<h2 class="title_home_page"><a href="<?php echo get_category_link(10); ?>" target="_blank"><?php echo $title_hp; ?></a></h2>
+		<?php $canbiet_arg = array(
 			'post_type' => 'post',
 			'order' => 'ASC',
 			'orderby' => 'date',
 			'post_status' => 'publish',
-			'cat' => 75,
-			'posts_per_page' => 3
+			'cat' => 10,
+			'posts_per_page' => 4
 		);
-		$hot_cptpp_query = new WP_Query($cptpp_arg);
-		if($hot_cptpp_query->have_posts()) : ?>
+		$hot_canbiet_query = new WP_Query($canbiet_arg);
+		if($hot_canbiet_query->have_posts()) : ?>
 			<ul>
-				<?php while ($hot_cptpp_query->have_posts()) : $hot_cptpp_query->the_post(); ?>
+				<?php while ($hot_canbiet_query->have_posts()) : $hot_canbiet_query->the_post(); ?>
 					<li>
-						<?php 
-						global $post;
-						$cptpp_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
-						<a href="<?php the_permalink(); ?>" target="_blank">
-							<figure style="background: url('<?php echo $cptpp_image[0]; ?>');"></figure>
-							<h4><?php the_title(); ?></h4>
-						</a>
+						<div class="wrap_figure">
+							<?php 
+							global $post;
+							$canbiet_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
+							<figure style="background: url('<?php echo $canbiet_image[0]; ?>');"><a href="<?php the_permalink(); ?>" target="_blank"></a></figure>
+						</div>
+						<div class="text_widget">
+							<h4><a href="<?php the_permalink(); ?>" target="_blank"><?php the_title(); ?></a></h4>
+							<p><span class="qb_date_post"><?php the_time('j F, Y'); ?></span></p>
+						</div>
 					</li>
 				<?php endwhile; 
 				wp_reset_postdata();
@@ -73,34 +99,28 @@ function myshortcode_cptpp_sidebar(){
 		<?php 
 		return ob_get_clean();
 	}
-	add_shortcode('sc_cptpp_sidebar','myshortcode_cptpp_sidebar');
+	add_shortcode('sc_canbiet_sidebar','myshortcode_canbiet_sidebar');
 
-	// shortcode sk sidebar homepage
-	function myshortcode_sk_sidebar(){ 
+		// shortcode baivietmoi sidebar singlepage
+	function myshortcode_baivietmoi_sidebar(){ 
 		ob_start();?>
-		<div class="qb_sk_sidebar container">
-			<?php $title_hp = get_cat_name(2);?>
-			<h2 class="title_home_page"><a href="<?php echo get_category_link(2); ?>" target="_blank">Sự kiện</a></h2>
-			<?php $sk_arg = array(
+		<div class="qb_canbiet_sidebar">
+			<h2 ><span>Bài viết mới</span></h2>
+			<?php $baivietmoi_arg = array(
 				'post_type' => 'post',
 				'order' => 'ASC',
 				'orderby' => 'date',
 				'post_status' => 'publish',
-				'cat' => 2,
-				'posts_per_page' => 4
+				'posts_per_page' => 5
 			);
-			$hot_sk_query = new WP_Query($sk_arg);
-			if($hot_sk_query->have_posts()) : ?>
+			$hot_baivietmoi_query = new WP_Query($baivietmoi_arg);
+			if($hot_baivietmoi_query->have_posts()) : ?>
 				<ul>
-					<?php while ($hot_sk_query->have_posts()) : $hot_sk_query->the_post(); ?>
+					<?php while ($hot_baivietmoi_query->have_posts()) : $hot_baivietmoi_query->the_post(); ?>
 						<li>
-							<?php 
-							global $post;
-							$sk_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
-							<a href="<?php the_permalink(); ?>" target="_blank">
-								<figure style="background: url('<?php echo $sk_image[0]; ?>');"></figure>
-								<h4><?php the_title(); ?></h4>
-							</a>
+							<div class="text_widget">
+								<h4><a href="<?php the_permalink(); ?>" target="_blank"><?php the_title(); ?></a></h4>
+							</div>
 						</li>
 					<?php endwhile; 
 					wp_reset_postdata();
@@ -113,146 +133,5 @@ function myshortcode_cptpp_sidebar(){
 			<?php 
 			return ob_get_clean();
 		}
-		add_shortcode('sc_sk_sidebar','myshortcode_sk_sidebar');
+		add_shortcode('sc_baivietmoi_sidebar','myshortcode_baivietmoi_sidebar');
 
-	// shortcode featured post sidebar homepage
-		function myshortcode_featured_checkbox(){ 
-			ob_start();?>
-			<div class="td_dn_sidebar">
-				<div class="list_title">
-					<ul>
-						<li data-tab="tab-1" class="current">Tiêu điểm</li>
-						<li data-tab="tab-2">Đọc nhiều</li>
-					</ul>
-				</div>
-				<div class="list_by_category">
-					<div id="tab-1" class="list_post tab-content current">
-						<?php  $ft_args = array(
-							'order' => 'ASC',
-							'posts_per_page' => 10,
-							'meta_key' => 'featured-checkbox',
-							'meta_value' => 'yes'
-						);
-						$ft_query = new WP_Query($ft_args);
-						if($ft_query->have_posts()) : ?>
-							<ul>
-								<?php while ($ft_query->have_posts()) : $ft_query->the_post(); ?>
-									<li>
-										<?php 
-										global $post;
-										$sk_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
-										<a href="<?php the_permalink(); ?>" target="_blank">
-											<figure style="background: url('<?php echo $sk_image[0]; ?>');"></figure>
-											<h4><?php the_title(); ?></h4>
-										</a>
-									</li>
-								<?php endwhile; 
-								wp_reset_postdata();
-								?>
-							</ul>
-							<?php else : echo 'No data'; 
-							endif; ?>
-						</div>
-						<div id="tab-2" class="list_post tab-content">
-							<?php  $ft_args = array(
-								'order' => 'ASC',
-								'posts_per_page' => 10,
-								'offset' => 10,
-								'meta_key' => 'featured-checkbox',
-								'meta_value' => 'yes'
-							);
-							$ft_query = new WP_Query($ft_args);
-							if($ft_query->have_posts()) : ?>
-								<ul>
-									<?php while ($ft_query->have_posts()) : $ft_query->the_post(); ?>
-										<li>
-											<?php 
-											global $post;
-											$sk_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
-											<a href="<?php the_permalink(); ?>" target="_blank">
-												<figure style="background: url('<?php echo $sk_image[0]; ?>');"></figure>
-												<h4><?php the_title(); ?></h4>
-											</a>
-										</li>
-									<?php endwhile; 
-									wp_reset_postdata();
-									?>
-								</ul>
-								<?php else : echo 'No data'; 
-								endif; ?>
-							</div>
-						</div>
-					</div>
-					<?php 
-					return ob_get_clean();
-				}
-				add_shortcode('sc_ft_check','myshortcode_featured_checkbox');
-
-	// shortcode featured post sidebar homepage
-				function myshortcode_featured_checkbox_archive(){ 
-					ob_start();?>
-					<div class="qb_ft_archive qb_post_hp">
-						<h2 class="title_home_page"><span>Tin tiêu điểm</span></h2>
-						<div class="list_by_category">
-							<div id="tab-1" class="list_post tab-content current">
-								<?php  $ft_args = array(
-									'order' => 'ASC',
-									'posts_per_page' => 5,
-									'meta_key' => 'featured-checkbox',
-									'meta_value' => 'yes'
-								);
-								$ft_query = new WP_Query($ft_args);
-								if($ft_query->have_posts()) : ?>
-									<ul>
-										<?php while ($ft_query->have_posts()) : $ft_query->the_post(); ?>
-											<li>
-												<?php 
-												global $post;
-												$sk_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
-												<figure style="background: url('<?php echo $sk_image[0]; ?>');"><a href="<?php the_permalink(); ?>" target="_blank"></a></figure>
-												<div class="info_post">
-													<h4><a href="<?php the_permalink(); ?>" target="_blank"><?php the_title(); ?></a></h4>
-													<span class="time_post"><?php the_time('d/m/Y H:i'); ?></span>
-												</div>
-											</li>
-										<?php endwhile; 
-										wp_reset_postdata();
-										?>
-									</ul>
-									<?php else : echo 'No data'; 
-									endif; ?>
-								</div>
-								<div id="tab-2" class="list_post tab-content">
-									<?php  $ft_args = array(
-										'order' => 'ASC',
-										'posts_per_page' => 10,
-										'offset' => 10,
-										'meta_key' => 'featured-checkbox',
-										'meta_value' => 'yes'
-									);
-									$ft_query = new WP_Query($ft_args);
-									if($ft_query->have_posts()) : ?>
-										<ul>
-											<?php while ($ft_query->have_posts()) : $ft_query->the_post(); ?>
-												<li>
-													<?php 
-													global $post;
-													$sk_image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), $size = 'large'); ?>
-													<a href="<?php the_permalink(); ?>" target="_blank">
-														<figure style="background: url('<?php echo $sk_image[0]; ?>');"></figure>
-														<h4><?php the_title(); ?></h4>
-													</a>
-												</li>
-											<?php endwhile; 
-											wp_reset_postdata();
-											?>
-										</ul>
-										<?php else : echo 'No data'; 
-										endif; ?>
-									</div>
-								</div>
-							</div>
-							<?php 
-							return ob_get_clean();
-						}
-						add_shortcode('sc_ft_check_archive','myshortcode_featured_checkbox_archive');
